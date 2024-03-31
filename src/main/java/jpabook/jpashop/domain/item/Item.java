@@ -1,6 +1,6 @@
-package jpabook.jpashop.domain;
+package jpabook.jpashop.domain.item;
 
-import jdk.jfr.Category;
+import jpabook.jpashop.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//한테이블에 몰아서 넣을거라 single table 저런식으로 표현해준다고함
 @DiscriminatorColumn(name = "dtype")
 @Getter
 @Setter
