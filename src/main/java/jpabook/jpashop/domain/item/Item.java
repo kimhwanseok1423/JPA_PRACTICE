@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain.item;
 
+import jpabook.jpashop.controller.ItemForm;
 import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @DiscriminatorColumn(name = "dtype")
 @Getter
 @Setter
-public  class Item {
+public  abstract class Item   {
     @Id
     @GeneratedValue
     @Column(name = "item_id")
@@ -23,6 +24,7 @@ public  class Item {
     private String name;
     private int price;
     private int stockQuantity;
+
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
@@ -37,6 +39,7 @@ public  class Item {
         }
         this.stockQuantity=restStock;
     }
+    public abstract Item createItem(ItemForm itemForm);
 
 
 }
