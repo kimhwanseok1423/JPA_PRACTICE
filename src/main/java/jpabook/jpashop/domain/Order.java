@@ -50,4 +50,47 @@ public class Order {
         this.delivery = delivery;
         delivery.setOrder(this);
     }
+
+    //생성 메서드
+
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+//comp = 배송완료
+        public void cancel() {
+            if(delivery.getStatus()==DeliveryStatus.COMP){
+                throw new IllegalStateException("이미 배송완료된 상품은 취소불가능합니다.");
+
+            }
+            this.setStatus(OrderStatus.CANCEL);
+            for(OrderItem orderItem:orderItems){
+                orderItem.cancle();
+
+            }
+        }
+
+        //전체 주문가격
+public int getTotalPrice(){
+        int totalPrice=0;
+        for(OrderItem orderItem: orderItems){
+            totalPrice+=orderItem.getTotalPrice();
+        }
+        return totalPrice;
+
+    }
+
+    public String getOrderDescription() {
+        // 주문 내용을 반환하는 로직을 구현
+        // 여기서는 간단히 "주문 번호: 회원 이름"으로 구현
+        return "주문 번호: " + this.id + ", 회원 이름: " + this.member.getName();
+    }
 }

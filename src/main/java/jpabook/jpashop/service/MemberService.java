@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -40,12 +41,20 @@ public Long join(Member member){
     //@Transactional(readOnly = true) ture주면 조회하는곳에서 성능최적화함
 
     public List<Member> findMembers(){
-    return memberRepository.findAll();
+
+
+        return memberRepository.findAll();
     }
 
 
     public Member findOne(Long memberId){
     return memberRepository.findOne(memberId);
     }
+@Transactional
+    public void update(Long id, String name) {
+    Member member = memberRepository.findOne(id);
+    member.setName(name);
 
+
+    }
 }

@@ -98,11 +98,11 @@
         if(dtype == ''){
             return false;
         }else if(dtype == 'A'){
-            $("#sub-form-A").css("display","inline");
+            $("#sub-A").css("display","inline");
         }else if(dtype == 'B'){
-            $("#sub-form-B").css("display","inline");
+            $("#sub-B").css("display","inline");
         }else if(dtype == 'M'){
-            $("#sub-form-M").css("display","inline");
+            $("#sub-M").css("display","inline");
         }
     };
 </script>
@@ -138,7 +138,7 @@
             <input type="number" th:field="*{stockQuantity}" class="form-control" placeholder="수량을 입력하세요">
         </div>
 
-        <div id="sub-form-A" class="sub-form hidden">
+        <div id="sub-A" class="sub-form hidden">
             <div class="form-group">
                 <label th:for="artist">아티스트</label>
                 <input type="text" th:field="*{artist}" class="form-control" placeholder="아티스트를 입력하세요">
@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <div id="sub-form-B" class="sub-form hidden">
+        <div id="sub-B" class="sub-form hidden">
             <div class="form-group">
                 <label th:for="author">저자</label>
                 <input type="text" th:field="*{author}" class="form-control" placeholder="저자를 입력하세요">
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <div id="sub-form-M" class="sub-form hidden">
+        <div id="sub-M" class="sub-form hidden">
             <div class="form-group">
                 <label th:for="director">감독</label>
                 <input type="text" th:field="*{director}" class="form-control" placeholder="감독을 입력하세요">

@@ -26,4 +26,20 @@ public class Album extends Item{
         this.setEtc(itemForm.getEtc());
         return this;
     }
+    @Override
+    public ItemForm transItemForm() {
+        Album album = (Album) this;
+
+        ItemForm itemForm = new ItemForm();
+        itemForm.setDtype(album.getDtype());
+        itemForm.setId(album.getId());
+        itemForm.setName(album.getName());
+        itemForm.setPrice(album.getPrice());
+        itemForm.setStockQuantity(album.getStockQuantity());
+
+        itemForm.setArtist(album.getArtist());
+        itemForm.setEtc(album.getEtc());
+
+        return itemForm;
+    }
 }

@@ -27,4 +27,20 @@ public class Book extends Item{
         this.author = itemForm.getAuthor();
         return this;
     }
+    @Override
+    public ItemForm transItemForm() {
+        Book book = (Book) this;
+
+        ItemForm itemForm = new ItemForm();
+        itemForm.setDtype(book.transItemForm().getDtype());
+        itemForm.setId(book.getId());
+        itemForm.setName(book.getName());
+        itemForm.setPrice(book.getPrice());
+        itemForm.setStockQuantity(book.getStockQuantity());
+
+        itemForm.setAuthor(book.getAuthor());
+        itemForm.setIsbn(book.getIsbn());
+
+        return itemForm;
+    }
 }

@@ -3,12 +3,21 @@
 <head th:fragment="header">
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Hello, world!</title>
 </head>
+<body>
+<div class="header" th:fragment="bodyHeader">
+    <ul class="nav nav-pills pull-right">
+    </ul>
+    <a href="/"><h3 class="text-muted">프로젝트 쇼핑몰</h3></a>
+</div>
+</body>
+</html>

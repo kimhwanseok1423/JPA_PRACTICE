@@ -17,6 +17,12 @@ import java.util.List;
 @Getter
 @Setter
 public  abstract class Item   {
+
+
+    public final static String ALBUM = "음반";
+    public final static String BOOK = "책";
+    public final static String MOVIE = "영화";
+
     @Id
     @GeneratedValue
     @Column(name = "item_id")
@@ -24,6 +30,27 @@ public  abstract class Item   {
     private String name;
     private int price;
     private int stockQuantity;
+    @Column(name="dtype", insertable = false, updatable = false)
+    protected String dtype;
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public String getDtypeNm() {
+        String dtypeNm = null;
+
+        if(dtype.equals("A")){
+            dtypeNm = Item.ALBUM;
+        }else if(dtype.equals("B")){
+            dtypeNm = Item.BOOK;
+        }else if(dtype.equals("M")){
+            dtypeNm = Item.MOVIE;
+        }
+        return dtypeNm;
+    }
+
+
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
@@ -42,4 +69,5 @@ public  abstract class Item   {
     public abstract Item createItem(ItemForm itemForm);
 
 
+    public abstract ItemForm transItemForm();
 }

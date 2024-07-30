@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -53,5 +55,26 @@ return "redirect:/items";
         List<Item> items = itemService.finditems();
         model.addAttribute("items",items);
         return "items/itemList";
+    }
+
+    @GetMapping("/items/{itemId}/edit" )
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model){
+        Item item = itemService.findOne(itemId);
+
+        ItemForm itemForm = item.transItemForm();
+
+        model.addAttribute("itemForm", itemForm);
+
+        return "items/editItemForm";
+    }
+    @PostMapping("items/{itemId}/edit")
+    public String updateItem(@ModelAttribute("form") ItemForm itemForm){
+
+        Item item = itemService.transItemEntity(itemForm);
+        //itemService.saveItem(item);
+        itemService.saveItem(item);
+
+        return "redirect:items";
+
     }
 }
