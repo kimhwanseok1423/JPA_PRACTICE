@@ -1,0 +1,14 @@
+/* 테이블 헤더 */
+table th {
+    padding: 10px 20px; /* 상하좌우 여백 조정 */
+}
+
+/* 테이블 내용 */
+table td {
+    padding: 10px 20px; /* 상하좌우 여백 조정 */
+}
+
+/* 테이블 가로 스크롤 */
+.table-scroll {
+    overflow-x: auto; /* 가로 스크롤 표시 */
+}

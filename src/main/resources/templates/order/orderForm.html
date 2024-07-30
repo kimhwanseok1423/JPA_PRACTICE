@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    .form-orders > li{
+        list-style-type: none;
+        width:inherit;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        padding-top:25px;
+        padding-left:10px;
+        padding-bottom:20px;
+        padding-righr:10px;
+    }
+
+</style>
+<script>
+
+    /*
+    * 상품 선택시 상품 리스트에 주문양식 클론 후 세팅
+    **/
+    let fn_choose_item = (obj) => {
+
+        let memberId = $("#member").val();
+
+        // 회원 선택 벨리데이션
+        if(memberId == ""){
+            alert("회원을 먼저 선택해 주세요.");
+            $("#item").val("");
+            return false;
+        }
+
+        // 선택된 옵션의 객체
+        let item = $(obj).find("option:selected");
+
+        let itemId = $(item).val();					//아이템의 값
+        let itemNm = $(item).text(); 					//아이템의 이름
+        let dtype = $(item).attr("data-dtype");		//아이템 타입
+        let dtypeNm = $(item).attr("data-dtype-name");	//아이템 타입 이름
+        let value1 = null;							//아이템(앨범, 책, 영화)의 첫번째 컬럼 값 (artist, author, director)
+        let value2 = null;							//아이템(앨범, 책, 영화)의 두번째 컬럼 값 (etc, isbn, actor)
+        let labelValue1 = null;						//아이템(앨범, 책, 영화)의 첫번째 컬럼 이름
+        let labelValue2 = null;						//아이템(앨범, 책, 영화)의 두번째 컬럼 이름
+
+        // dtype 별로 각 추가된 커스텀 데이터 테그에서 값 세팅
+        if(dtype == 'A'){
+            value1 = $(item).attr("data-artist");
+            value2 = $(item).attr("data-etc");
+            labelValue1 = "아티스트";
+            labelValue2 = "기타";
+
+        }else if(dtype = 'B'){
+            value1 = $(item).attr("data-author");
+            value2 = $(item).attr("data-isbn");
+            labelValue1 = "저자";
+            labelValue2 = "ISBN";
+
+        }else{
+            value1 = $(item).attr("data-director");
+            value2 = $(item).attr("data-actor");
+            labelValue1 = "감독";
+            labelValue2 = "배우";
+        }
+
+        let idx = $(".form-orders").find("li").length;
+        //추가할 아이템의 인덱스 0부터 시작
+
+        $(".form-disabled").find(".form-order").clone().appendTo(".form-orders");
+        // 미리 만들어둔 주문양식을 복사
+
+
+        //  선택한 주문 양식에 대한 jQuery 객체를 변수 chose에 저장합니다
+        let chose = $(".form-orders").find("li").eq(idx);
+
+        // name을 orderDtoList[n].memberId 로 변경
+        $(chose).find("input[name=memberId]")
+            .attr("name", "orderDtoList["+idx+"].memberId")
+            .val(memberId);
+
+        // name을 orderDtoList[n].itemId 로 변경
+        $(chose).find("input[name=itemId]")
+            .attr("name", "orderDtoList["+idx+"].itemId")
+            .val( itemId );
+
+        // name을 orderDtoList[n].count 로 변경
+        $(chose).find("input[name=count]")
+            .attr("name", "orderDtoList["+idx+"].count");
+
+        $(chose).find(".item-dtype-nm").text(dtypeNm );
+        $(chose).find(".item-name").text(itemNm );
+        $(chose).find(".item-value1").text(value1 );
+        $(chose).find(".label-value1").text(labelValue1 );
+        $(chose).find(".item-value2").text(value2 );
+        $(chose).find(".label-value2").text(labelValue2 );
+
+        //회원 셀렉트 박스를 비활성화
+        $(".form-orders").find(".form-order").css("display","");
+        $(".memberWrap").hide();
+        $(".textMemberWrap").show();
+        $("#textMember").val($(item).text());
+
+
+        $("#item").val("");
+
+    }
+
+    //헤당 상품 갯수 감소
+    let fn_minus_count = (obj) => {
+        let cnt=parseInt($(obj).parent().find("input").val(),0);
+
+        if((cnt-1)>0) {
+            $(obj).parent().find("input").val(cnt-1);
+
+        }else {
+            if(confirm("상품을 제거하시겠습니까?")) {
+            $(obj).parent().parent().remove();
+            }
+
+
+
+            //모든 상품이 삭제 되면, 회원 선택 가능하게함
+            if($(".form-orders").find("li").length == 0){
+                $(".memberWrap").show();
+                $("#member").val("");
+                $("#textMember").val("");
+                $(".textMemberWrap").hide();
+            }
+        }
+    }
+//상품 갯수 증가
+    let fn_plus_count=(obj) => {
+        let cnt = parseInt($(obj).parent().find("input").val(), 0);
+        $(obj).parent().find("input").val(cnt + 1);
+    }
+   
+</script>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form role="form" action="/order" method="post">
+
+        <div class="form-group memberWrap">
+            <label for="member">주문회원</label>
+            <select id="member" class="form-control">
+                <option value="">회원선택</option>
+                <option th:each="member : ${members}"
+                        th:value="${member.id}"
+                        th:text="${member.name}" />
+            </select>
+        </div>
+        <div class="form-group textMemberWrap"  style="display: none;">
+            <label for="textMember">주문회원</label>
+            <input id="textMember" class="form-control"  style="background-color: #dddddd"  readonly="readonly"/>
+        </div>
+
+        <!-- 하단은 ItemDto로 조회하여 값을 가져옴 -->
+        <div class="form-group">
+            <label for="item">상품명</label>
+            <select id="item" class="form-control" onchange="fn_choose_item(this)">
+                <option value="">상품선택</option>
+                <option th:each="item : ${items}"
+                        th:value="${item.getId()}"
+                        th:text="${item.getName()}"
+                        th:data-dtype="${item.getDtype()}"
+                        th:data-dtype-name="${item.getDtypeNm()}"
+                        th:data-price="${item.getPrice()}"
+
+
+                th:data-artist="${item.getArtist()}"
+                th:data-etc="${item.getEtc()}"
+                th:data-author="${item.getAuthor()}"
+                th:data-isbn="${item.getIsbn()}"
+                th:data-director="${item.getDirector()}"
+                th:data-actor="${item.getActor()}"
+                />
+            </select>
+        </div>
+        <ul class="form-orders" style="list-style-type: none;">
+        </ul>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    </form>
+    <!-- 상품선택후 나오는 li 창-->
+    <ul class="form-disabled">
+        <li class="form-order" style="display: none;">
+            <h5><span class="item-dtype-nm"></span> > <span class="item-name"></span></h5>
+            <h6>
+                <span class="label-value1"></span> : <span class="item-value1"></span></br>
+                <span class="label-value2"></span> : <span class="item-value2"></span>
+            </h6>
+
+            <input type="hidden" name="memberId">
+            <input type="hidden" name="itemId">
+            <div>
+                <button type="button" onclick="fn_minus_count(this)">-</button>
+                <input name = "count" value="1">
+                <button type="button" onclick="fn_plus_count(this)">+</button>
+            </div>
+        </li>
+    </ul>
+
+
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+
+</div> <!-- /container -->
+
+</body>
+</html>
