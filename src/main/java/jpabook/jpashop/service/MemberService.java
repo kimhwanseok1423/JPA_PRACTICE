@@ -39,7 +39,7 @@ public Long join(Member member){
 
     }
     //@Transactional(readOnly = true) ture주면 조회하는곳에서 성능최적화함
-
+@Transactional
     public List<Member> findMembers(){
 
 
@@ -56,5 +56,9 @@ public Long join(Member member){
     member.setName(name);
 
 
+    }
+
+    public List<Member> findSearch(String name,Integer age){
+        return memberRepository.searchMembers(name,age);
     }
 }

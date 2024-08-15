@@ -1,7 +1,12 @@
 package jpabook.jpashop;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpabook.jpashop.domain.Entity.Member_practice;
@@ -9,6 +14,9 @@ import jpabook.jpashop.domain.Entity.QMember_practice;
 import jpabook.jpashop.domain.Entity.QTeam_practice;
 import jpabook.jpashop.domain.Entity.Team_practice;
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.dto.MemberDto;
+import jpabook.jpashop.dto.QMemberDto;
+import jpabook.jpashop.dto.UserDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -326,4 +334,173 @@ assertThat(loaded).as("패치조인미적용").isFalse();
             System.out.println(tuple);
         }
     }
+
+
+    @Test
+    public void basicCase(){
+        List<String> result = queryFactory.select(member_practice.age
+                        .when(10).then("열살")
+                        .when(20).then("스무살")
+                        .otherwise("기타")).from(member_practice)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s"+s);
+
+
+        }
+
+
+    }
+@Test
+    public void complexCase(){
+    List<String> result = queryFactory.select(new CaseBuilder()
+            .when(member_practice.age.between(0, 20)).then("0~20살")
+            .when(member_practice.age
+                    .between(21, 30)).then("21~30살")
+            .otherwise("기타")).from(member_practice).fetch();
+
+    for (String s : result) {
+        System.out.println(s+"s");
+    }
+}
+
+
+@Test
+    public void constant(){
+    List<Tuple> result = queryFactory.select(member_practice.username, Expressions.constant("A"))
+            .from(member_practice).fetch();
+    for (Tuple s : result) {
+        System.out.println("s="+s);
+    }
+
+}
+
+@Test
+    public void concat(){
+    List<String> result = queryFactory.select(member_practice.username.concat("_").concat(member_practice.age.stringValue()))
+            .from(member_practice).where(member_practice.username.eq("member1")).fetch();
+
+    for (String s : result) {
+        System.out.println("s="+s);
+    }
+
+}
+
+@Test
+    public void simple(){
+        queryFactory.select(member_practice.username).from(member_practice).fetch();
+}
+
+
+@Test
+    public void Tuple(){
+    List<Tuple> result = queryFactory.select(member_practice.username, member_practice.age)
+            .from(member_practice).fetch();
+    for (Tuple tuple : result) {
+        String username=tuple.get(member_practice.username);
+        Integer age=tuple.get(member_practice.age);
+        System.out.println(username);
+        System.out.println(age);
+
+
+    }
+
+}
+//순수 JPA에서 DTO로 변환
+
+@Test
+    public void findDtoByJPQL(){
+    List<MemberDto> result = em.createQuery("select new  jpabook.jpashop.dto.MemberDto(m.username,m.age) from Member_practice m", MemberDto.class).getResultList();
+
+    for (MemberDto memberDto : result) {
+        System.out.println("memberDto="+memberDto);
+    }
+
+}
+
+@Test
+    public void findjqueryDto(){
+    List<MemberDto> result = queryFactory.select(Projections.bean(MemberDto.class,
+            member_practice.username,
+            member_practice.age)).from(member_practice).fetch();
+
+    for (MemberDto memberDto : result) {
+        System.out.println("memberDto="+memberDto);
+    }
+
+}
+
+    @Test
+    public void findjqueryDtoFiled(){
+        List<MemberDto> result = queryFactory.select(Projections.fields(MemberDto.class,
+                member_practice.username,
+                member_practice.age)).from(member_practice).fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto="+memberDto);
+        }
+
+    }
+    @Test
+    public void findjqueryDtoConstructor(){
+        List<UserDto> result = queryFactory.select(Projections.constructor(UserDto.class,
+                member_practice.username,
+                member_practice.age)).from(member_practice).fetch();
+
+        for (UserDto memberDto : result) {
+
+            System.out.println("memberDto=" + memberDto);
+        }
+
+    }
+
+    @Test
+    public void findUserDto(){
+
+        QMember_practice memberPractice=new QMember_practice("memberPractice");
+        List<UserDto> result = queryFactory.select(Projections.fields(UserDto.class,
+                member_practice.username.as("name"),
+                ExpressionUtils.as(JPAExpressions.select(memberPractice.age.max()).from(memberPractice),"age")
+
+        )).from(member_practice).fetch();
+
+
+
+    }
+@Test
+    public void findDtoQueryProjection(){
+    List<MemberDto> result = queryFactory.select(new QMemberDto(member_practice.username, member_practice.age
+            ))
+            .from(member_practice)
+            .fetch();
+
+    for (MemberDto memberDto : result) {
+        System.out.println(memberDto);
+    }
+}
+
+@Test
+    public void dynamicQuery_BooleanBuilder(){
+        String usernameParam="member1";
+        Integer ageParam=10;
+       List<Member_practice> result= serachMember1(usernameParam,ageParam);
+assertThat(result.size()).isEqualTo(1);
+
+
+
+}
+
+    private List<Member_practice> serachMember1(String usernameCond, Integer ageCond ) {
+
+        BooleanBuilder builder =new BooleanBuilder();
+        if(usernameCond !=null){
+            builder.and(member_practice.username.eq(usernameCond));
+        }
+        if(ageCond !=null){
+            builder.and(member_practice.age.eq(ageCond));
+        }
+        return queryFactory.selectFrom(member_practice).where(builder).fetch();
+    }
+
 }

@@ -1,31 +1,97 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header" />
+<style>
+    .search {
+        display: flex;
+        flex-wrap: wrap; /* 아이템이 공간을 넘길 경우 자동으로 줄바꿈 */
+        gap: 30px; /* 아이템 간 간격 */
+        max-width: 400px; /* 필요에 따라 너비 조정 */
+    }
+
+    .search select,
+    .search input {
+        flex: 1; /* 아이템이 공간을 가득 채우도록 설정 */
+        min-width: 30px; /* 최소 너비 설정 (디자인에 맞게 조정) */
+    }
+
+    .search button {
+        flex: none; /* 버튼이 공간을 차지하지 않도록 설정 */
+        height: 40px;
+        width: 100px; /* 버튼 너비 조정 */
+    }
+</style>
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
-    <div>
+
+    <!-- 검색 폼 -->
+    <form action="/membersearch" method="get">
+        <div class="search">
+            <select id="searchType1" name="searchType" class="form-control">
+                <option value="username">이름</option>
+                <option value="age">나이</option>
+            </select>
+            <input type="text" id="searchValue1" name="searchValue" class="form-control" placeholder="검색 값" />
+            <button type="submit" class="btn btn-primary">검색</button>
+        </div>
+    </form>
+
+    <!-- 검색 결과 테이블 -->
+    <div th:if="${membersearch != null and #lists.size(membersearch) > 0}">
+        <h2>검색 결과</h2>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>이름</th>
+                <th>나이</th>
                 <th>도시</th>
                 <th>주소</th>
                 <th>우편번호</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="member : ${members}">
-                <td th:text="${member.id}"></td>
-                <td th:text="${member.name}"></td>
-                <td th:text="${member.address?.city}"></td>
-                <td th:text="${member.address?.street}"></td>
-                <td th:text="${member.address?.zipcode}"></td>
+            <tr th:each="member : ${membersearch}">
+                <td th:text="${member.id}">ID</td>
+                <td th:text="${member.name}">이름</td>
+                <td th:text="${member.age}">나이</td>
+                <td th:text="${member.address?.city}">도시</td>
+                <td th:text="${member.address?.street}">주소</td>
+                <td th:text="${member.address?.zipcode}">우편번호</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(membersearch)}">
+                <td colspan="6">검색 결과가 없습니다.</td>
             </tr>
             </tbody>
         </table>
     </div>
+
+    <!-- 전체 멤버 목록 테이블 (항상 표시) -->
+    <h2>전체 회원 목록</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>도시</th>
+            <th>주소</th>
+            <th>우편번호</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.id}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.age}"></td>
+            <td th:text="${member.address?.city}"></td>
+            <td th:text="${member.address?.street}"></td>
+            <td th:text="${member.address?.zipcode}"></td>
+        </tr>
+        </tbody>
+    </table>
+
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>

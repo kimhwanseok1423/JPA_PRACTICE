@@ -21,6 +21,8 @@ public class Member {
 
     @NotEmpty
     private String name;
+
+    private Integer age;
     @Embedded
     private Address address;
 
