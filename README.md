@@ -23,8 +23,8 @@
  <br>
 ## 사용기술
  <br>
-인텔리제이 , Spring Boot , JPA , queryDsl , 포트원 , 카카오 Api<br><br>
-<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/src/main/resources/static/image/캡처1.PNG"><br>
+ Spring Boot , JPA , queryDsl , H2 , Postman , 포트원 , 카카오 Api ,인텔리제이 <br><br>
+<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처1.PNG"><br>
 
 
 ## 느낀 점 
@@ -52,13 +52,15 @@
   - 로그인 기능
     - 로그인 시 사용자가 입력한 정보가 데이터베이스와 일치하는지 확인합니다. 로그인 성공 시 사용자에게 로그인 상태를 유지하는 기능을 제 
       공하며, 로그인 실패 시 적절한 오류 메시지를 표시합니다.
-  
+  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처2.PNG"><br>
   - 마이 페이지
     - 전체 회원 목록 조회 및 동적쿼리 BooleanBuilder를 활용한 회원 이름, 나이를 검색하여 조회기능 추가 
       
-<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/src/main/resources/static/image/캡처1.PNG"><br>
+<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처2.PNG"><br>
 
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처22.PNG"><br>
+
+<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처3.PNG"><br>
+
 
  - 기능 과정
     https://hwanpaperblog.tistory.com/29
