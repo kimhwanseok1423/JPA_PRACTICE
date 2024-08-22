@@ -86,12 +86,10 @@
     - 상품 등록 , 수정
       - 전 프로젝트에서 쇼핑몰을했지만 판매자입장에서 상품을 등록할수가 없다는 생각이 들어서 추가했습니다
       - 수정을 통해 재고 수량 조절 가능 <br>
+       <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처14.PNG"><br>
+        <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처8.PNG"><br>
         
-  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처14.PNG"><br>
-  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처8.PNG"><br>
-
-
-
+       
 
     - 상품 주문 
       - 상품을 주문했을때 기존 재고에서 빼주는 함수 설정
