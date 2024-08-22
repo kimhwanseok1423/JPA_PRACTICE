@@ -24,7 +24,7 @@
 ## 사용기술
  <br>
 인텔리제이 , Spring Boot , JPA , queryDsl , 포트원 , 카카오 Api<br><br>
-
+<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/src/main/resources/static/image/캡처1.PNG"><br>
 
 
 ## 느낀 점 
@@ -56,7 +56,7 @@
   - 마이 페이지
     - 전체 회원 목록 조회 및 동적쿼리 BooleanBuilder를 활용한 회원 이름, 나이를 검색하여 조회기능 추가 
       
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처21.PNG"><br>
+<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/src/main/resources/static/image/캡처1.PNG"><br>
 
 <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처22.PNG"><br>
 
