@@ -5,7 +5,7 @@
     width:1000px !important;
 }
 .container{
-    width:1000px !important;
+    width:1400px !important;
     margin: 0 auto !important;
 }.form-inline {
      width: 100%;
@@ -36,7 +36,7 @@
     /* 필요에 따라 다른 스타일을 추가할 수 있습니다. */
 }
 .table-scroll {
-    width: 1000px; /* 너비를 1000px로 설정합니다. */
+    width: 1300px; /* 너비를 1000px로 설정합니다. */
     overflow-x: auto; /* 필요시 가로 스크롤을 활성화합니다. */
 }
 body {
@@ -51,7 +51,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 20px;
     background: #fff;
     border-radius: 8px;

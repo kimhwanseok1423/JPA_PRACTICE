@@ -502,5 +502,8 @@ assertThat(result.size()).isEqualTo(1);
         }
         return queryFactory.selectFrom(member_practice).where(builder).fetch();
     }
-
+//    @Test
+//    private List<Member_practice> searchMember2(String usernameCond,Integer ageCond){
+//    return queryFactory.selectFrom(member_practice).where(user).fetch();
+//}
 }

@@ -1,18 +1,79 @@
+#spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/jpashop
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#    properties:
+#      hibernate:
+#   #     show_sql: false
+#        format_sql: true
+#        default_batch_fetch_size: 100
+#logging.level:
+#  org.hibernate.SQL: debug
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          kakao:
+#            client-id: [ 요약 정보 탭 > 앱 키 에서 확인 가능한 REST API 키 ]
+#            client-secret: [ 보안 탭에서 확인 가능한 Client Secret 코드 ]
+#            scope:
+#              - account_email
+#              - profile_nickname
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#            client-name: Kakao
+#            client-authentication-method: client_secret_post
+#
+#        provider:
+#          kakao:
+#            authorization-uri: https://kauth.kakao.com/oauth/authorize
+#            token-uri: https://kauth.kakao.com/oauth/token
+#            user-info-uri: https://kapi.kakao.com/v2/user/me
+#            user-name-attribute: id
+# # org.hibernate.type: debug #스프링 부트 2.x, hibernate5
+# # org.hibernate.orm.jdbc.bind: trace #스프링 부트 3.x, hibernate6
 spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/jpashop
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
-   #     show_sql: false
         format_sql: true
         default_batch_fetch_size: 100
-logging.level:
-  org.hibernate.SQL: debug
- # org.hibernate.type: debug #스프링 부트 2.x, hibernate5
- # org.hibernate.orm.jdbc.bind: trace #스프링 부트 3.x, hibernate6
+
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 6cef32da5e13d31b92c8c392c23b03fe
+            client-secret: 13wFi5hSmZYdFDHYh8wb6rU35Nah3DZA
+            scope:
+              - account_email
+              - profile_nickname
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            client-name: Kakao
+            client-authentication-method: client_secret_post
+
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+logging:
+  level:
+    org.hibernate.SQL: debug
