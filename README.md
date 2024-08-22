@@ -88,7 +88,8 @@
       - 수정을 통해 재고 수량 조절 가능 <br>
        <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처14.PNG"><br>
         <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처8.PNG"><br>
-        
+      - 기능 과정  <br>
+       https://hwanpaperblog.tistory.com/19
        
 
     - 상품 주문 
@@ -98,7 +99,8 @@
       - 장바구니도 여러개의 상품을 결제 하듯이 기존 책 카테고리를 영화 책 앨범등을 세분화 시켜 주문하도록 기능추가
     <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처6.PNG"><br>
 
-
+      - 기능과정  <br>
+       https://hwanpaperblog.tistory.com/25
 
 
 
@@ -110,11 +112,16 @@
      
     <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처11.PNG"><br>
     <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처12.PNG"><br>
-
+     
+      - 기능과정 <br>
+        https://hwanpaperblog.tistory.com/26
 
     - 성능 최적화
       - 용량 데이터 처리 시, 페이징과 정렬을 통해 서버의 부하를 줄이고 응답 속도를 향상
       - 자주 조회되는 데이터는 캐시를 적용하여 데이터베이스 쿼리 횟수를 줄이고 응답 속도 개선
+
+    
+    
 </details>
 
 
