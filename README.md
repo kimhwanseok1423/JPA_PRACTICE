@@ -30,7 +30,7 @@
 ## 느낀 점 
 
 
-이번 프로젝트는 JPA와 Spring JPA, 그리고 Querydsl을 실무에 적용해보는 좋은 경험이었습니다. 직접 프로젝트를 기획하고 개발한 것은 아니지만, 다양한 인터넷 강의와 자료를 참고하여 실제로 작동하는 시스템을 구축하는 과정을 통해 많은 것을 배울 수 있었습니다.
+이번 프로젝트는 JPA와 Spring JPA, 그리고 Querydsl을 실무에 적용해보는 좋은 경험이었습니다.  다양한 인터넷 강의와 자료를 참고하여 실제로 작동하는 시스템을 구축하는 과정을 통해 많은 것을 배울 수 있었습니다.
 
 특히, JPA의 영속성 컨텍스트와 연관관계 매핑, 그리고 동적 쿼리를 처리하는 방법에 대해 깊이 이해하게 되었습니다. 또한, Querydsl을 통해 복잡한 쿼리 문제를 간결하고 효율적으로 해결할 수 있다는 것을 경험할 수 있었습니다.
 
@@ -51,8 +51,11 @@
     -`UserRepository`조회하여 중복 시 예외 던집니다.
   - 로그인 기능
     - 로그인 시 사용자가 입력한 정보가 데이터베이스와 일치하는지 확인합니다. 로그인 성공 시 사용자에게 로그인 상태를 유지하는 기능을 제 
-      공하며, 로그인 실패 시 적절한 오류 메시지를 표시합니다.
-  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처2.PNG"><br>
+      공하며, 로그인 실패 시 적절한 오류 메시지를 표시합니다.<br>
+  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처4.PNG"><br>
+
+  - 카카오 로그인 기능
+     - 추후 업데이트 예정(오류수정중) <br>
   - 마이 페이지
     - 전체 회원 목록 조회 및 동적쿼리 BooleanBuilder를 활용한 회원 이름, 나이를 검색하여 조회기능 추가 
       
@@ -62,93 +65,42 @@
 <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처3.PNG"><br>
 
 
- - 기능 과정
-    https://hwanpaperblog.tistory.com/29
+ - 기능 과정 <br>
+  https://hwanpaperblog.tistory.com/16  <br>
+  https://hwanpaperblog.tistory.com/17  <br>
+  https://hwanpaperblog.tistory.com/29  <br>
 
 
 </details>
 
 <details>
-  <summary>관리자 페이지 </summary>
+  <summary>쇼핑몰 기능   </summary>
 
 
   - **구현 기능** <br>
-    - 관리자 페이지
-    - 회원 삭제 ,리뷰 관리
-    - 기간별 매출 현황 
+    - 상품 등록
+    - 상품 주문
+    - 여러 상품 주문 
 
   - **구현 방법** <br>
-    - 관리자 페이지 구성
-      - 관리자가 쉽게 사용할 수 있도록 UI/UX를 설계했습니다.
-    - 회원 삭제
-      - 회원 목록을 표시하고, 특정 회원을 선택하여 삭제할 수 있도록 했습니다.
-      - 삭제 요청 시 확인 절차를 추가하여 실수로 인한 삭제를 방지합니다.
-    - 리뷰 관리
-      - 모든 리뷰를 리스트업하여 관리할 수 있는 인터페이스를 제공했습니다.
-      - 리뷰를 승인하거나 삭제할 수 있는 기능을 구현했습니다.
-    - 기간별 매출 현황
-      - 기간을 설정하여 해당 기간의 매출 데이터를 조회할 수 있는 기능을 구현했습니다.
-      - 매출 데이터를 차트로 시각화하여 분석할 수 있도록 했습니다.
- <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처23.PNG"><br>
-
- <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처24.PNG"><br>
-
- <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처25.PNG"><br>
-   
-</details>
-
-<details>
-  <summary>고객들이 원하는 알고리즘 추천  </summary> <br>
-
-- **구현 기능** <br>
-    - 로그인한 회원과 비슷한 취향의 고객이 선택한 책들을 추천해주는 기능 <br>
-
-- **구현 방법**<br>
-    - 유사도 높은 순으로 정렬
-      - 사용자가 평가 혹은 구매하지 않은 아이템을 유사도에 따라 정렬한다.
-    - 인기도 높은 순으로 정렬
-      - 각 아이템 간 등급(평점)의 평균을 계산하고 이를 통해 인기도를 결정한다. 그 후 인기도 순으로 정렬하고 상위 N개를 출력한다.<br>
+    - 상품 등록
+      - 전 프로젝트에서 쇼핑몰을했지만 판매자입장에서 상품을 등록할수가 없다는 생각이 들어서 추가했습니다
         
-      <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처15.PNG"><br><br>
-        <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처16.PNG"><br><br>
-          <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처17.PNG"><br><br>
-            <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처18.PNG"><br><br>
-  <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처19.PNG"><br><br>
-   <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처20.PNG"><br>
+    - 상품 주문 
+      - 상품을 주문했을때 기존 재고에서 빼주는 함수 설정
+        
+    - 여러 상품 주문 
+      - 장바구니도 여러개의 상품을 결제 하듯이 기존 책 카테고리를 영화 책 앨범등을 세분화 시켜 주문하도록 기능추가  
+        
+    - 주문 내역
+      - 상품주문시 주문 내역에 조회 , 취소 가능하도록 기능 추가.
+      - 주문한 회원, 취소한 회원을 검색할수있도록 기능추가.
+      - 포트원 API를 활용해 카카오페이로 결제가 가능하도록 구현
+
 
 </details>
 
-<details>
-  <summary>메인 페이지 기능 구현  </summary>
 
-- **구현 기능** <br>
-    - 
-
-- **구현 방법**<br>
-   - 메인 페이지 구성
-     - 데이터베이스에서 책 데이터를 가져와 select 요소에 동적으로 표시했습니다.
-   - 카테고리 페이지
-     - 데이터베이스 테이블에 카테고리 컬럼을 추가하여 책들이 해당 카테고리에 맞게 분류되도록 설정했습니다.
-       사용자가 메인 페이지에서 선택한 카테고리에 따라 해당 카테고리에 속하는 책들을 조회하고 표시했습니다.
-   - 상세 페이지
-     - 사용자가 특정 책을 선택하면, 선택된 책의 id 값을 기반으로 데이터베이스에서 해당 책의 상세 정보를 가져와 상세 페이지에 표시했습니다.
-       상세 페이지에서는 책의 제목, 저자, 가격, 설명 등의 세부 정보를 제공했습니다.
-   - 장바구니 기능
-     - 사용자가 원하는 책을 장바구니에 추가할 수 있도록 구현했습니다.
-       장바구니에 담긴 책들은 사용자 세션에 저장되어 유지되며, 필요 시 데이터베이스에도 저장됩니다.
-   - 결제 기능
-     - 장바구니에 담긴 책들을 확인하고 결제할 수 있는 기능을 구현했습니다.
-     결제 정보 입력, 결제 처리, 그리고 주문 확인 단계를 거쳐 사용자가 책을 구매할 수 있도록 했습니다.
-
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처26.PNG"><br><br><br><br>
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처27.PNG"><br><br><br><br>
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처28.PNG"><br><br><br><br>
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처29.PNG"><br><br><br><br>
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처30.PNG"><br><br><br><br>
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처31.PNG"><br><br><br><br>
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처32.PNG"><br><br><br><br>
-
-</details>
 
  ## ERD
 <img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처12.PNG">
