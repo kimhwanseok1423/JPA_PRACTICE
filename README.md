@@ -10,7 +10,7 @@
 - [느낀 점](#느낀-점)
 - [구현 기능](#구현기능)
 - [ERD](#erd)
-- [영상](#영상)
+
 
 
 ## 개요
@@ -83,8 +83,13 @@
     - 여러 상품 주문 
 
   - **구현 방법** <br>
-    - 상품 등록
+    - 상품 등록 , 수정
       - 전 프로젝트에서 쇼핑몰을했지만 판매자입장에서 상품을 등록할수가 없다는 생각이 들어서 추가했습니다
+      - 수정을 통해 재고 수량 조절 가능 <br>
+        
+  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처14.PNG"><br>
+  <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처8.PNG"><br>
+
 
 
 
@@ -92,22 +97,34 @@
       - 상품을 주문했을때 기존 재고에서 빼주는 함수 설정
         
     - 여러 상품 주문 
-      - 장바구니도 여러개의 상품을 결제 하듯이 기존 책 카테고리를 영화 책 앨범등을 세분화 시켜 주문하도록 기능추가  
-        
+      - 장바구니도 여러개의 상품을 결제 하듯이 기존 책 카테고리를 영화 책 앨범등을 세분화 시켜 주문하도록 기능추가
+    <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처6.PNG"><br>
+
+
+
+
+
+
+ 
     - 결제 시스템 
       - 주문 내역에서 결제할수있도록 기능 추가
       - 포트원 API를 활용해 카카오페이로 결제가 가능하도록 구현
+     
+    <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처11.PNG"><br>
+    <img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처12.PNG"><br>
+
+
     - 성능 최적화
-     -  용량 데이터 처리 시, 페이징과 정렬을 통해 서버의 부하를 줄이고 응답 속도를 향상
-     -   자주 조회되는 데이터는 캐시를 적용하여 데이터베이스 쿼리 횟수를 줄이고 응답 속도 개선
+      - 용량 데이터 처리 시, 페이징과 정렬을 통해 서버의 부하를 줄이고 응답 속도를 향상
+      - 자주 조회되는 데이터는 캐시를 적용하여 데이터베이스 쿼리 횟수를 줄이고 응답 속도 개선
 </details>
 
 
 
  ## ERD
-<img src="https://github.com/kimhwanseok1423/project_ezenbooks/blob/master/frontend/public/img/캡처12.PNG">
+<img src="https://github.com/kimhwanseok1423/JPA_PRACTICE/blob/master/src/main/resources/static/image/캡처13.PNG"><br>
 
-  ## 영상
-   ## [유튜브 링크](https://www.youtube.com/watch?v=ntikFWHEWn4)
+
+ 
 
    
